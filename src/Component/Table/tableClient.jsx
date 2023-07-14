@@ -3,8 +3,8 @@ import cs from './table.module.css';
 import ClientAddReduxForm from "./clientAddForm";
 
 function TableClient(props) {
-    //console.log(props);
-    //debugger;
+    console.log(props);
+    // debugger;
 
     const AddClient = (formData) => {
         //console.log(formData);
@@ -35,7 +35,7 @@ function TableClient(props) {
     }
     return (
         <div className={cs.tab}>
-            {props.Client.map(c => 
+            {props.client.map(c => 
                 <table key={c.Id} className={cs.tab_total}>
                     <tr>
                         <td className={cs.tdTime}>
@@ -47,7 +47,7 @@ function TableClient(props) {
                             
                         </td>
                         <td className={cs.tdSevice}>
-                            <input value={c.service} onChange = {e=>onChengeService(e, c.Id, props.masterId)}/>
+                            <input value={c.procedureName} onChange = {e=>onChengeService(e, c.Id, props.masterId)}/>
                             
                         </td>
                         <td className={cs.tdSevice}>

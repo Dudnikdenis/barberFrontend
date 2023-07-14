@@ -1,13 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3001/'
+    baseURL: 'http://34.16.144.78:8080/' //http://34.16.144.78:8080/records/1   http://localhost:3001/'  
 })
-export const assortimentAPI = {
-    GetAssortiment(changingIsFetching, setAssortiment) 
+export const clientAPI = {
+    async GetClient() 
     {
-        return instance.get("assortiment").then(response => {           
-            return response.data
-        });
+        const response = await instance.get("records/1");
+        return response.data;
     }
 }

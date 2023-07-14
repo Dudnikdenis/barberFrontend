@@ -1,19 +1,23 @@
-import React from "react";
+import React,{useState, useEffect}from "react";
 import cs from './table.module.css';
 import TableClient from "./tableClient";
 
-function TableHeader(props) {
-    //console.log(props);
+let TableHeader = (props) => {
+    // console.log(props.master);
     // debugger;
+    
+    useEffect( () => {
+        props.getClient()
+    },[]);
+    
+    
     return (
-        <div className={cs.tab}>
-            {props.master.map(m =>
-            <div key={m.Id}>
-               <div className={cs.header}>{m.MasterName}</div>
-               <div className={cs.header}>{m.Date}</div> 
-               <TableClient Client = {m.ClientName} masterId = {m.Id} {...props}/>
-            </div> 
-                )}
+        <div className={cs.tab}>{props.master.map( m =>
+            <div>
+                <div className={cs.header}>{m.userName}</div>
+                <div className={cs.header}>{m.date}</div> 
+                <TableClient client={m.userRecords}/> 
+            </div> )} 
         </div>
         
     )

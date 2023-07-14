@@ -1,4 +1,4 @@
-import { assortimentAPI } from "../API/api";
+import { clientAPI } from "../API/api";
 
 //const тип action = "тип action"; пример action
 const ADD_CLIENT = "ADD_CLIENT"; 
@@ -6,57 +6,51 @@ const UPDATE_TIME = "UPDATE_TIME";
 const UPDATE_CLIENT_NAME = "UPDATE_CLIENT_NAME"; 
 const UPDATE_SERVICE = "UPDATE_SERVICE";
 const UPDATE_COMMENT = "UPDATE_COMMENT";
+const SET_CLIENT = "SET_CLIENT";
 
-const initialState = {
-    master: [
-        {   Id:1,
-            MasterName: "Иванов Иван",
-            Date: '29.06.2023',
-            ClientName:[ 
-
-                {   Id:1,
-                    time:"8:30",
-                    clientName:"Петрова Катя",
-                    service:"monicur",
-                    comment:"bla-bla"
-                },
-
-                {   Id:2,
-                    time:"9:00",
-                    clientName:"Сидорова Катя",
-                    service:"pedicur",
-                    comment:"bla-bla"
-                }
-        ]},
-
-        { 
-            Id: 2,
-            MasterName: "Петухов Петр",
-            Date: '30.06.2023',
-            ClientName: [ 
-                {
-                    Id:1,
-                    time:"8:30",
-                    clientName:"Иванова Катя",
-                    service:"Просто подстрич ногти",
-                    comment:"bla-bla"} ] }
-        ],
-    isFiching:true
-    
+let initialState = {
+    master:[]
 };
 
-const masterReducer = (state = initialState, action) => {
-    // console.log(action);
-    // debugger;
+    // новые данные {
+    //     "userName":"userName",
+    //     "date":"date",
+    //        "userRecords":[
+    //         {
+    //         "lineId":1,
+    //         "userId":1,
+    //         "userCompany":"userCompany",
+    //         "date":"date",
+    //         "time":"time",
+    //         "clientName":"clientName",
+    //         "procedureName":"procedureName",
+    //         "comment":"comment"},
+    //         {
+    //            "lineId":2,
+    //         "userId":1,
+    //         "userCompany":"userCompany",
+    //         "date":"date",
+    //         "time":"time",
+    //         "clientName":"clientName",
+    //         "procedureName":"procedureName","
+    //         comment":"comment"}
+    //     ]
+    //     }
+
+
+let masterReducer = (state = initialState, action) => {
     let stateCopy;
     switch (action.type){
+        case SET_CLIENT: 
+            stateCopy = {...state};
+            stateCopy.master = [...state.master];
+            stateCopy.master.push(action.master);
+            return stateCopy;
         case ADD_CLIENT:
             stateCopy = {...state};
             stateCopy.master = [...state.master];
-            stateCopy.master.ClientName = [...state.master[action.masterId-1].ClientName]
+            stateCopy.master.userRecords = [...state.master[action.masterId-1].ClientName]
             stateCopy.master[action.masterId-1].ClientName.push(action.newClient) 
-            console.log(stateCopy);
-            //debugger;
             return stateCopy;
 
         case UPDATE_TIME:
@@ -99,5 +93,14 @@ export const UpdateTimeCreator = (newTime,masterId,clientId) => ({type: UPDATE_T
 export const UpdateClientNameCreator = (newClientName,masterId,clientId) => ({type: UPDATE_CLIENT_NAME, newClientName,masterId,clientId});
 export const UpdateServiceCreator = (newService,masterId,clientId) => ({type: UPDATE_SERVICE, newService,masterId,clientId});
 export const UpdateCommentCreator = (newComment,masterId,clientId) => ({type: UPDATE_COMMENT, newComment,masterId,clientId});
+export const SetClientCreator = (master) => ({type:SET_CLIENT,master});
+
+export const getClient = () => {   // Thunk
+    return (dispatch) => {
+        clientAPI.GetClient().then(response => {
+        dispatch (SetClientCreator(response))
+      });
+    };
+}
 
 export default masterReducer;

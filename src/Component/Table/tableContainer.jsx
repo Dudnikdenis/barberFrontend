@@ -5,7 +5,8 @@ import { AddClientCreator,
     UpdateTimeCreator, 
     UpdateClientNameCreator, 
     UpdateServiceCreator, 
-    UpdateCommentCreator} from "../../Redux/Master-reducer";
+    UpdateCommentCreator,
+    getClient} from "../../Redux/Master-reducer";
 
 let mapStateToProps = (state) => {
     // console.log(state)
@@ -20,6 +21,7 @@ const TableContainer = connect(mapStateToProps,{
     UpdateTimeCreator, 
     UpdateClientNameCreator, 
     UpdateServiceCreator, 
-    UpdateCommentCreator})(TableHeader);
+    UpdateCommentCreator,
+    getClient})(TableHeader);
 
 export default TableContainer;
