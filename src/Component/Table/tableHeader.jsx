@@ -3,8 +3,7 @@ import cs from './table.module.css';
 import TableClient from "./tableClient";
 
 let TableHeader = (props) => {
-    // console.log(props.master);
-    // debugger;
+   //debugger;
     
     useEffect( () => {
         props.getClient()
@@ -12,12 +11,11 @@ let TableHeader = (props) => {
     
     
     return (
-        <div className={cs.tab}>{props.master.map( m =>
-            <div>
-                <div className={cs.header}>{m.userName}</div>
-                <div className={cs.header}>{m.date}</div> 
-                <TableClient client={m.userRecords}/> 
-            </div> )} 
+        <div className={cs.tab}>
+            <div className={cs.header}>{props.master.userName}</div>
+            <div className={cs.header}>{props.master.date}</div> 
+            {props.master.userRecords? <TableClient client={props.master.userRecords}/> : "Подождите"}
+            
         </div>
         
     )

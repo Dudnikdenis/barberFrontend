@@ -3,11 +3,10 @@ import cs from './table.module.css';
 import ClientAddReduxForm from "./clientAddForm";
 
 function TableClient(props) {
-    console.log(props);
-    // debugger;
+    
+    //debugger;
 
     const AddClient = (formData) => {
-        //console.log(formData);
         let result = {
             Id:props.Client.length+1,
             time:formData.time,

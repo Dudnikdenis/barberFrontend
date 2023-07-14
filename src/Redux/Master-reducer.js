@@ -9,7 +9,7 @@ const UPDATE_COMMENT = "UPDATE_COMMENT";
 const SET_CLIENT = "SET_CLIENT";
 
 let initialState = {
-    master:[]
+    master:{}
 };
 
     // новые данные {
@@ -43,8 +43,7 @@ let masterReducer = (state = initialState, action) => {
     switch (action.type){
         case SET_CLIENT: 
             stateCopy = {...state};
-            stateCopy.master = [...state.master];
-            stateCopy.master.push(action.master);
+            stateCopy.master = {...state.master, ...action.master};
             return stateCopy;
         case ADD_CLIENT:
             stateCopy = {...state};
