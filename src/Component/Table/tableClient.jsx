@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import cs from './table.module.css';
 import ClientAddReduxForm from "./clientAddForm";
 
+
 function TableClient(props) {
     
     //debugger;
@@ -35,27 +36,31 @@ function TableClient(props) {
     return (
         <div className={cs.tab}>
             {props.client.map(c => 
-                <table key={c.Id} className={cs.tab_total}>
-                    <tr>
-                        <td className={cs.tdTime}>
-                            <input value={c.time} onChange = {e=>onChengeTime(e, c.Id, props.masterId)}/>
-                        </td>
+            <div>
+                
+                    <table key={c.Id} className={cs.tab_total}>
+                        <tr>
+                            <td className={cs.tdTime}>
+                                <input value={c.time} onChange = {e=>onChengeTime(e, c.Id, props.masterId)}/>
+                            </td>
 
-                        <td className={cs.tdClient}>
-                            <input value={c.clientName} onChange = {e=>onChengeClientName(e, c.Id, props.masterId)}/> 
+                            <td className={cs.tdClient}>
+                                <input value={c.clientName} onChange = {e=>onChengeClientName(e, c.Id, props.masterId)}/> 
                             
-                        </td>
-                        <td className={cs.tdSevice}>
-                            <input value={c.procedureName} onChange = {e=>onChengeService(e, c.Id, props.masterId)}/>
+                            </td>
+                            <td className={cs.tdSevice}>
+                                <input value={c.procedureName} onChange = {e=>onChengeService(e, c.Id, props.masterId)}/>
                             
-                        </td>
-                        <td className={cs.tdSevice}>
-                            <input value={c.comment} onChange = {e=>onChengeComment(e, c.Id, props.masterId)}/>
+                            </td>
+                            <td className={cs.tdSevice}>
+                                <input value={c.comment} onChange = {e=>onChengeComment(e, c.Id, props.masterId)}/>
                             
-                        </td>
-                    </tr>
-                </table>)} 
+                            </td>
+                        </tr>
+                    </table>
+            </div>)} 
                 <ClientAddReduxForm onSubmit={AddClient}></ClientAddReduxForm>
+                
         </div>
         
     )

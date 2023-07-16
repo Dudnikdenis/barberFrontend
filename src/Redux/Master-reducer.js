@@ -94,9 +94,9 @@ export const UpdateServiceCreator = (newService,masterId,clientId) => ({type: UP
 export const UpdateCommentCreator = (newComment,masterId,clientId) => ({type: UPDATE_COMMENT, newComment,masterId,clientId});
 export const SetClientCreator = (master) => ({type:SET_CLIENT,master});
 
-export const getClient = () => {   // Thunk
+export const getClient = (id) => {   // Thunk
     return (dispatch) => {
-        clientAPI.GetClient().then(response => {
+        clientAPI.GetClient(id).then(response => {
         dispatch (SetClientCreator(response))
       });
     };
