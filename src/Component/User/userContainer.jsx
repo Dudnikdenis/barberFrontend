@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-import {getUser} from "../../Redux/User-reducer";
+import {getUser, addUser} from "../../Redux/User-reducer";
 import Users from "./Users";
 
 let mapStateToProps = (state) => {
@@ -12,6 +12,6 @@ let mapStateToProps = (state) => {
     };
 }
 
-const Userontainer = connect(mapStateToProps,{getUser})(Users);
+const Userontainer = connect(mapStateToProps,{getUser, addUser})(Users);
 
 export default Userontainer;

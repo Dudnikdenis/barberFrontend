@@ -5,7 +5,7 @@ import { userAPI } from "../API/api";
 // const UPDATE_TIME = "UPDATE_TIME"; 
 // const UPDATE_CLIENT_NAME = "UPDATE_CLIENT_NAME"; 
 // const UPDATE_SERVICE = "UPDATE_SERVICE";
-// const UPDATE_COMMENT = "UPDATE_COMMENT";
+const ADD_USER = "ADD_USER";
 const SET_USER = "SET_USER";
 
 let initialState = {
@@ -41,7 +41,7 @@ let userReducer = (state = initialState, action) => {
             console.log("action");
             console.log(action.users);
             return stateCopy;
-        // case ADD_CLIENT:
+        // case ADD_USER:
         //     stateCopy = {...state};
         //     stateCopy.master = [...state.master];
         //     stateCopy.master.userRecords = [...state.master[action.masterId-1].ClientName]
@@ -84,7 +84,8 @@ let userReducer = (state = initialState, action) => {
 // export const название-диспатча = (параметр) => ({type: название action, параметр}); пример dispatch или добавляем thunk
 
 //export const UpdateCommentCreator = (newComment,masterId,clientId) => ({type: UPDATE_COMMENT, newComment,masterId,clientId});
-export const SetUserCreator = (users) => ({type:SET_USER,users});
+export const SetUserCreator = (users) => ({type:ADD_USER,users});
+// export const AddUserCreator = (users) => ({type:SET_USER,users});
 
 export const getUser= () => {   // Thunk
     console.log("getUser");
@@ -92,6 +93,16 @@ export const getUser= () => {   // Thunk
         userAPI.GetUser().then(response => {
         dispatch (SetUserCreator(response))
       });
+    };
+}
+
+export const addUser= (user) => {   // Thunk
+    console.log("getUser");
+    return (dispatch) => {
+        userAPI.AddUser(user);
+        userAPI.GetUser().then(response => {
+            dispatch (SetUserCreator(response))
+          });
     };
 }
 
