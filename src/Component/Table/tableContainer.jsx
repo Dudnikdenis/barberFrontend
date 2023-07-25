@@ -6,7 +6,8 @@ import { AddClientCreator,
     UpdateClientNameCreator, 
     UpdateServiceCreator, 
     UpdateCommentCreator,
-    getClient} from "../../Redux/Master-reducer";
+    getClient,
+    addRecordsUser} from "../../Redux/Master-reducer";
 
     
 
@@ -24,6 +25,6 @@ const TableContainer = connect(mapStateToProps,{
     UpdateClientNameCreator, 
     UpdateServiceCreator, 
     UpdateCommentCreator,
-    getClient})(TableHeader);
+    getClient, addRecordsUser})(TableHeader);
 
 export default TableContainer;

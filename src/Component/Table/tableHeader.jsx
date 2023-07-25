@@ -18,7 +18,7 @@ let TableHeader = (props) => {
             <Link to="/">Назад</Link>
             <div className={cs.header}>{props.master.userName}</div>
             <div className={cs.header}>{props.master.date}</div> 
-            {props.master.userRecords? <TableClient client={props.master.userRecords}/> : "Подождите"}
+            {props.master.userRecords? <TableClient client={props.master.userRecords} {...props}/> : "Подождите"}
             
         </div>
         

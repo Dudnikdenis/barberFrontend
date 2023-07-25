@@ -1,4 +1,4 @@
-import { clientAPI } from "../API/api";
+import { clientAPI, userAPI } from "../API/api";
 
 //const тип action = "тип action"; пример action
 const ADD_CLIENT = "ADD_CLIENT"; 
@@ -11,32 +11,6 @@ const SET_CLIENT = "SET_CLIENT";
 let initialState = {
     master:{}
 };
-
-    // новые данные {
-    //     "userName":"userName",
-    //     "date":"date",
-    //        "userRecords":[
-    //         {
-    //         "lineId":1,
-    //         "userId":1,
-    //         "userCompany":"userCompany",
-    //         "date":"date",
-    //         "time":"time",
-    //         "clientName":"clientName",
-    //         "procedureName":"procedureName",
-    //         "comment":"comment"},
-    //         {
-    //            "lineId":2,
-    //         "userId":1,
-    //         "userCompany":"userCompany",
-    //         "date":"date",
-    //         "time":"time",
-    //         "clientName":"clientName",
-    //         "procedureName":"procedureName","
-    //         comment":"comment"}
-    //     ]
-    //     }
-
 
 let masterReducer = (state = initialState, action) => {
     let stateCopy;
@@ -99,6 +73,16 @@ export const getClient = (id) => {   // Thunk
         clientAPI.GetClient(id).then(response => {
         dispatch (SetClientCreator(response))
       });
+    };
+}
+
+export const addRecordsUser= (userId, records) => {   // Thunk
+    console.log("addUser");
+    return (dispatch) => {
+        userAPI.recordsUser(userId, records);
+        clientAPI.GetClient(userId).then(response => {
+            dispatch (SetClientCreator(response))
+          });
     };
 }
 

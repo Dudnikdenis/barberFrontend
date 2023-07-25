@@ -21,5 +21,10 @@ export const userAPI = {
     async AddUser(user) 
     {
          await instance.post("users", user);
+    },
+
+    async recordsUser(userID,records) 
+    {
+         await instance.post(`records/user/${userID}`, records);
     }
 }

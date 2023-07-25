@@ -9,13 +9,17 @@ function TableClient(props) {
 
     const AddClient = (formData) => {
         let result = {
-            Id:props.Client.length+1,
-            time:formData.time,
-            clientName:formData.clientName,
-            service:formData.service,
-            comment:formData.comment
+            lineId: 0,
+            userId: props.master.userId,
+            date: formData.date,
+            time: formData.time,
+            clientName: formData.clientName,
+            procedureName: formData.service,
+            procedureCost: "1000",
+            procedureDiscount: "10%",
+            comment: formData.comment
         }
-        props.AddClientCreator(result, props.masterId)
+        props.addRecordsUser(props.master.userId, result)
     }
 
     const onChengeTime = (e,clientId, masterId) => {
