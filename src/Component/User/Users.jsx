@@ -8,7 +8,7 @@ const Users = (props) => {
 
     return(
         <div>
-            {props.users? <User users={props.users}/> :"Подождите!"}
+            {props.users.length===0? "Подождите!" : <User users={props.users} {...props}/> }
         </div>
     )
 };

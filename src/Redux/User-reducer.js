@@ -84,7 +84,7 @@ let userReducer = (state = initialState, action) => {
 // export const название-диспатча = (параметр) => ({type: название action, параметр}); пример dispatch или добавляем thunk
 
 //export const UpdateCommentCreator = (newComment,masterId,clientId) => ({type: UPDATE_COMMENT, newComment,masterId,clientId});
-export const SetUserCreator = (users) => ({type:ADD_USER,users});
+export const SetUserCreator = (users) => ({type:SET_USER,users});
 // export const AddUserCreator = (users) => ({type:SET_USER,users});
 
 export const getUser= () => {   // Thunk
@@ -97,7 +97,7 @@ export const getUser= () => {   // Thunk
 }
 
 export const addUser= (user) => {   // Thunk
-    console.log("getUser");
+    console.log("addUser");
     return (dispatch) => {
         userAPI.AddUser(user);
         userAPI.GetUser().then(response => {

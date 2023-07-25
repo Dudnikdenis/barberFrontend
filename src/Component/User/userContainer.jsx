@@ -4,8 +4,8 @@ import {getUser, addUser} from "../../Redux/User-reducer";
 import Users from "./Users";
 
 let mapStateToProps = (state) => {
-    console.log(state);
-    // debugger;
+//     console.log(state);
+//     debugger;
     return{ 
 
         users: state.user.users
