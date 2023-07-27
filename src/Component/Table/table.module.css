@@ -35,3 +35,11 @@
 .input{
     background:transparent;
 }
+
+.link{
+    text-decoration: none;
+}
+
+.span{
+    margin-left: 20px;
+}

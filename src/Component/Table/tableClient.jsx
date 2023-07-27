@@ -1,26 +1,12 @@
 import React, {useState} from "react";
 import cs from './table.module.css';
-import ClientAddReduxForm from "./clientAddForm";
+
 
 
 function TableClient(props) {
     
     //debugger;
 
-    const AddClient = (formData) => {
-        let result = {
-            lineId: 0,
-            userId: props.master.userId,
-            date: formData.date,
-            time: formData.time,
-            clientName: formData.clientName,
-            procedureName: formData.service,
-            procedureCost: "1000",
-            procedureDiscount: "10%",
-            comment: formData.comment
-        }
-        props.addRecordsUser(props.master.userId, result)
-    }
 
     const onChengeTime = (e,clientId, masterId) => {
         props.UpdateTimeCreator(e.target.value, masterId, clientId);
@@ -62,9 +48,7 @@ function TableClient(props) {
                             </td>
                         </tr>
                     </table>
-            </div>)} 
-                <ClientAddReduxForm onSubmit={AddClient}></ClientAddReduxForm>
-                
+            </div>)}                 
         </div>
         
     )

@@ -3,10 +3,9 @@ import TableContainer from "../Table/tableContainer";
 import UserContainer from "../User/userContainer";
 import {
     BrowserRouter, Routes,
-    Switch,
     Route,
-    Link,
   } from 'react-router-dom'
+  import ClientPage from "../ClientPage/clientPage";
 //import cs from './main_window.module.css'
 
 function Main(){    
@@ -14,8 +13,9 @@ function Main(){
         <div >
             <BrowserRouter>
                     <Routes>
-                        <Route path='/' element = {<UserContainer/>  }/>    
-                        <Route path='/user/:userID' element = {<TableContainer/>  }/>
+                        <Route path='/' element = {<ClientPage/>  }/>
+                        <Route path='/users' element = {<UserContainer/>  }/>    
+                        <Route path='/records/user/:userID' element = {<TableContainer/>  }/>
                     </Routes>
             </BrowserRouter>
                                   

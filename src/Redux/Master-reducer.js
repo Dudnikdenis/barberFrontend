@@ -7,18 +7,26 @@ const UPDATE_CLIENT_NAME = "UPDATE_CLIENT_NAME";
 const UPDATE_SERVICE = "UPDATE_SERVICE";
 const UPDATE_COMMENT = "UPDATE_COMMENT";
 const SET_CLIENT = "SET_CLIENT";
+const SET_IS_DID_MOUNT = "SET_IS_DID_MOUNT"
 
 let initialState = {
-    master:{}
+    master:[],
+    isDidMount:false,
+    userName:null
 };
 
 let masterReducer = (state = initialState, action) => {
     let stateCopy;
     switch (action.type){
         case SET_CLIENT: 
-            stateCopy = {...state};
-            stateCopy.master = {...state.master, ...action.master};
-            return stateCopy;
+            if(state.master.length===0 || state.master.toString() !== action.master.toString())
+            {
+                return {...state,
+                ...state.master = [...state.master, ...action.master],
+                ...state.userName = action.master[0].username
+                };
+            }
+            else return {...state};
         case ADD_CLIENT:
             stateCopy = {...state};
             stateCopy.master = [...state.master];
@@ -53,6 +61,11 @@ let masterReducer = (state = initialState, action) => {
             stateCopy.master.ClientName = [...state.master[action.masterId-1].ClientName]
             stateCopy.master[action.masterId-1].ClientName[action.clientId-1].comment = action.newComment
             return stateCopy;
+        
+        case SET_IS_DID_MOUNT:
+            return {...state,
+                 isDidMount:action.isDidMount
+                }
 
         default: 
             return state
@@ -67,10 +80,11 @@ export const UpdateClientNameCreator = (newClientName,masterId,clientId) => ({ty
 export const UpdateServiceCreator = (newService,masterId,clientId) => ({type: UPDATE_SERVICE, newService,masterId,clientId});
 export const UpdateCommentCreator = (newComment,masterId,clientId) => ({type: UPDATE_COMMENT, newComment,masterId,clientId});
 export const SetClientCreator = (master) => ({type:SET_CLIENT,master});
+export const SetIsDidMountCreator = (isDidMount) => ({type:SET_IS_DID_MOUNT,isDidMount});
 
-export const getClient = (id) => {   // Thunk
+export const getClient = (id, startDate, endDate) => {   // Thunk
     return (dispatch) => {
-        clientAPI.GetClient(id).then(response => {
+        clientAPI.GetClient(id, startDate, endDate).then(response => {
         dispatch (SetClientCreator(response))
       });
     };

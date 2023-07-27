@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AddUserReduxForm from "./AddUserReduxForm";
+import cs from "./user.module.css";
 
 const User = (props) => {
 
@@ -21,9 +22,12 @@ const User = (props) => {
 
     return(
         <div>
+            <div className={cs.totalLink}>
+                <Link className={cs.link} to="/">Главная страница </Link>
+            </div>
             {props.users.map(us=>
-                <div key={us.userId}>
-                    <Link to={"/user/"+us.userId}>{us.userName}</Link>
+                <div className={cs.user} key={us.userId}>
+                    <Link className={cs.userLink} to={"/records/user/"+us.userId}>{us.userName}</Link>
                 </div>
             )}
             <AddUserReduxForm onSubmit={AddUser}/>

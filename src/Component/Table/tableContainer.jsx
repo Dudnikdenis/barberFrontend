@@ -7,7 +7,8 @@ import { AddClientCreator,
     UpdateServiceCreator, 
     UpdateCommentCreator,
     getClient,
-    addRecordsUser} from "../../Redux/Master-reducer";
+    addRecordsUser,
+    SetIsDidMountCreator} from "../../Redux/Master-reducer";
 
     
 
@@ -15,7 +16,9 @@ let mapStateToProps = (state) => {
     // console.log(state)
     // debugger;
     return{ 
-        master: state.master.master
+        master: state.master.master,
+        isDidMount:state.master.isDidMount,
+        userName:state.master.userName
     };
 }
 
@@ -25,6 +28,6 @@ const TableContainer = connect(mapStateToProps,{
     UpdateClientNameCreator, 
     UpdateServiceCreator, 
     UpdateCommentCreator,
-    getClient, addRecordsUser})(TableHeader);
+    getClient, addRecordsUser,SetIsDidMountCreator})(TableHeader);
 
 export default TableContainer;
