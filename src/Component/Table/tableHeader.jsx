@@ -13,28 +13,36 @@ let TableHeader = (props) => {
 
     const AddClient = (formData) => {
         let result = {
-            lineId: 0,
-            userId: props.master.userId,
-            date: formData.date,
-            time: formData.time,
-            clientName: formData.clientName,
-            procedureName: formData.service,
-            procedureCost: "1000",
-            procedureDiscount: "10%",
-            comment: formData.comment
+
+            "clientName": `${formData.clientName}`,
+            "comment": `${formData.comment}`,
+            "date": `${formData.date}`,
+            "lineId": "0",
+            "procedureCost": "1000",
+            "procedureDiscount": "10%",
+            "procedureName": `${formData.service}`,
+            "time": `${formData.time}`,
+            "userId": `${usId}`
+
+            // "lineId": "0",
+            // "userId": `${usId}`,
+            // "date": `${formData.date}`,
+            // "time": `${formData.time}`,
+            // "clientName": `${formData.clientName}`,
+            // "procedureName": `${formData.service}`,
+            // "procedureCost": "1000",
+            // "procedureDiscount": "10%",
+            // "comment": `${formData.comment}`
         }
-        props.addRecordsUser(usId, result)
+        props.addRecordsUser(usId, result,"01-01-2020", "02-01-2020")
     }
 
   
     useEffect( () => {
-        if(!props.isDidMount)
-        {            
-            props.getClient(usId, "01-01-2020", "02-01-2020");
-            props.SetIsDidMountCreator(true);
-        }
+                 
+        props.getClient(usId, "01-01-2020", "02-01-2020");
         
-    },[]);
+    },[usId]);
     
     
     return (

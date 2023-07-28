@@ -36,14 +36,3 @@ const User = (props) => {
 };
 
 export default User;
-
-//   "userId": 0,
-//   "userName": "Петя Пупков",
-//   "userCompany": "My Company",
-//   "userPhoneNumber": "8909058030",
-//   "userProfession": "Парикмахер",
-//   "userRole": "USER",
-//   "usersAccessed": "доделать",
-//   "password": "123456",
-//   "email": "dycjh@example.com",
-//   "picture": "string"

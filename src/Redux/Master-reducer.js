@@ -8,6 +8,7 @@ const UPDATE_SERVICE = "UPDATE_SERVICE";
 const UPDATE_COMMENT = "UPDATE_COMMENT";
 const SET_CLIENT = "SET_CLIENT";
 const SET_IS_DID_MOUNT = "SET_IS_DID_MOUNT"
+const DELITE_CLIENT = "DELITE_CLIENT"
 
 let initialState = {
     master:[],
@@ -19,7 +20,7 @@ let masterReducer = (state = initialState, action) => {
     let stateCopy;
     switch (action.type){
         case SET_CLIENT: 
-            if(state.master.length===0 || state.master.toString() !== action.master.toString())
+            if(state.master.toString() !== action.master.toString())
             {
                 stateCopy = {...state};
                 stateCopy.master = [...state.master, ...action.master];
@@ -27,6 +28,11 @@ let masterReducer = (state = initialState, action) => {
               
             }
             else return {...state};
+
+        case DELITE_CLIENT: 
+            stateCopy = {...state};
+            stateCopy.master = [];
+            return stateCopy;
         
         case UPDATE_TIME:
             stateCopy = {...state};
@@ -75,20 +81,22 @@ export const UpdateServiceCreator = (newService,masterId,clientId) => ({type: UP
 export const UpdateCommentCreator = (newComment,masterId,clientId) => ({type: UPDATE_COMMENT, newComment,masterId,clientId});
 export const SetClientCreator = (master) => ({type:SET_CLIENT,master});
 export const SetIsDidMountCreator = (isDidMount) => ({type:SET_IS_DID_MOUNT,isDidMount});
+export const DeliteClientCreator = () => ({type:DELITE_CLIENT,})
 
 export const getClient = (id, startDate, endDate) => {   // Thunk
     return (dispatch) => {
+        dispatch(DeliteClientCreator());
         clientAPI.GetClient(id, startDate, endDate).then(response => {
         dispatch (SetClientCreator(response))
       });
     };
 }
 
-export const addRecordsUser= (userId, records) => {   // Thunk
+export const addRecordsUser= (userId, records, startDate, endDate) => {   // Thunk
     console.log("addUser");
     return (dispatch) => {
         userAPI.recordsUser(userId, records);
-        clientAPI.GetClient(userId).then(response => {
+        clientAPI.GetClient(userId, startDate, endDate).then(response => {
             dispatch (SetClientCreator(response))
           });
     };
