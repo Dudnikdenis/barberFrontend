@@ -27,7 +27,7 @@ const User = (props) => {
             </div>
             {props.users.map(us=>
                 <div className={cs.user} key={us.userId}>
-                    <Link className={cs.userLink} to={"/records/user/"+us.userId}>{us.userName}</Link>
+                    <Link className={cs.userLink} to={"/records/user/"+us.userId} state={{usName:us.userName, usId: us.userId}}>{us.userName}</Link>
                 </div>
             )}
             <AddUserReduxForm onSubmit={AddUser}/>

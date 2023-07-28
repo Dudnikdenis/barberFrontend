@@ -11,8 +11,8 @@ const SET_IS_DID_MOUNT = "SET_IS_DID_MOUNT"
 
 let initialState = {
     master:[],
-    isDidMount:false,
-    userName:null
+    isDidMount:false
+    
 };
 
 let masterReducer = (state = initialState, action) => {
@@ -21,19 +21,13 @@ let masterReducer = (state = initialState, action) => {
         case SET_CLIENT: 
             if(state.master.length===0 || state.master.toString() !== action.master.toString())
             {
-                return {...state,
-                ...state.master = [...state.master, ...action.master],
-                ...state.userName = action.master[0].username
-                };
+                stateCopy = {...state};
+                stateCopy.master = [...state.master, ...action.master];
+                return stateCopy;
+              
             }
             else return {...state};
-        case ADD_CLIENT:
-            stateCopy = {...state};
-            stateCopy.master = [...state.master];
-            stateCopy.master.userRecords = [...state.master[action.masterId-1].ClientName]
-            stateCopy.master[action.masterId-1].ClientName.push(action.newClient) 
-            return stateCopy;
-
+        
         case UPDATE_TIME:
             stateCopy = {...state};
             stateCopy.master = [...state.master];

@@ -13,10 +13,8 @@ import { AddClientCreator,
     
 
 let mapStateToProps = (state) => {
-    // console.log(state)
-    // debugger;
     return{ 
-        master: state.master.master,
+        master: state.master,
         isDidMount:state.master.isDidMount,
         userName:state.master.userName
     };

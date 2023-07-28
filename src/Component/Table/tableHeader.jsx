@@ -2,11 +2,14 @@ import React,{useEffect}from "react";
 import cs from './table.module.css';
 import TableClient from "./tableClient";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ClientAddReduxForm from "./clientAddForm";
 
 
 let TableHeader = (props) => {
+
+    const location = useLocation();
+    const { usName, usId } = location.state;
 
     const AddClient = (formData) => {
         let result = {
@@ -20,14 +23,14 @@ let TableHeader = (props) => {
             procedureDiscount: "10%",
             comment: formData.comment
         }
-        props.addRecordsUser(props.master.userId, result)
+        props.addRecordsUser(usId, result)
     }
 
-   const {userID} = useParams(); //используется вместо withRouter
+  
     useEffect( () => {
         if(!props.isDidMount)
         {            
-            props.getClient(userID, "01-01-2020", "02-01-2020");
+            props.getClient(usId, "01-01-2020", "02-01-2020");
             props.SetIsDidMountCreator(true);
         }
         
@@ -42,16 +45,16 @@ let TableHeader = (props) => {
             <span className={cs.span}>
                 <Link className={cs.link} to="/users">Назад</Link>
             </span>
-            {props.userName?  <div>
-                <div className={cs.header}>{props.userName}</div>
-                {props.master.map(m=>
+           <div>
+                <div className={cs.header}>{usName}</div>
+                {props.master.master.map(m=>
                 <div>
                     <div className={cs.header}>{m.date}</div> 
-                    {m.userRecords.length===0? <TableClient client={m.userRecords} {...props}/> : "Нет записей"}
+                    {m.userRecords.length===0? "Нет записей": <TableClient client={m.userRecords} {...props}/>}
                 </div>
                 )
             }
-            </div> : "Подождите"}
+            </div> 
             
             <ClientAddReduxForm onSubmit={AddClient}></ClientAddReduxForm>
             

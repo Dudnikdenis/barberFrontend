@@ -39,7 +39,6 @@ let userReducer = (state = initialState, action) => {
                 
             stateCopy.users = [...state.users, ...action.users];
             console.log("action");
-            console.log(action.users);
             return stateCopy;
         // case ADD_USER:
         //     stateCopy = {...state};
