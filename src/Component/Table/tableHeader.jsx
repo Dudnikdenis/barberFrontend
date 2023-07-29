@@ -1,13 +1,14 @@
-import React,{useEffect}from "react";
+import React,{useEffect, useState}from "react";
 import cs from './table.module.css';
 import TableClient from "./tableClient";
 import { useParams } from "react-router-dom";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import ClientAddReduxForm from "./clientAddForm";
 
 
 let TableHeader = (props) => {
 
+    const [records,setRecords] = useState({});
     const location = useLocation();
     const { usName, usId } = location.state;
 
@@ -58,7 +59,6 @@ let TableHeader = (props) => {
                 )
             }
             </div> 
-            
             <ClientAddReduxForm onSubmit={AddClient}></ClientAddReduxForm>
             
         </div>
