@@ -20,18 +20,27 @@ let masterReducer = (state = initialState, action) => {
     let stateCopy;
     switch (action.type){
         case SET_CLIENT: 
-        console.log(state.master.toString() !== action.master.toString());
-            if(state.master.toString() !== action.master.toString())
-            {
-                stateCopy = {...state};
-                stateCopy.master = [...state.master, ...action.master];
-                for (let i = 0;i<stateCopy.master.length;i++){
-                    stateCopy.master[i].userRecords = [ ...action.master[i].userRecords]
-                }
-                return stateCopy;
+
+        stateCopy = {...state};
+        stateCopy.master = [...state.master, ...action.master];
+        for (let i = 0;i<action.master.length;i++){
+            stateCopy.master[i].userRecords = [ ...action.master[i].userRecords]
+        }
+        return stateCopy;
+
+
+        // console.log(state.master.toString() !== action.master.toString());
+        //     if(state.master.toString() !== action.master.toString())
+        //     {
+        //         stateCopy = {...state};
+        //         stateCopy.master = [...state.master, ...action.master];
+        //         for (let i = 0;i<stateCopy.master.length;i++){
+        //             stateCopy.master[i].userRecords = [ ...action.master[i].userRecords]
+        //         }
+        //         return stateCopy;
               
-            }
-            else return {...state};
+        //     }
+        //     else return {...state};
 
         default: 
             return state
@@ -51,25 +60,23 @@ export const getClient = (id, startDate, endDate) => {   // Thunk
     };
 }
 
-export const deliteRecordsUser = (lineId) => { 
+export const deliteRecordsUser = (id, lineId, startDate, endDate) => { 
     return (dispatch) => {
         dispatch(DeliteClientCreator());
         clientAPI.DeliteRecordsUser(lineId);
-        // clientAPI.GetClient(id, startDate, endDate).then(response => {
-        //     dispatch (SetClientCreator(response))});
+        clientAPI.GetClient(id, startDate, endDate).then(response => {
+            dispatch (SetClientCreator(response))});
     };
 }
 
 export const addRecordsUser= (userId, records, startDate, endDate) => { 
     return (dispatch) => {
+        dispatch(DeliteClientCreator());
         clientAPI.recordsUser(userId, records).then(response => {
-            console.log("addrecords");
-            console.log(response);    
-            //dispatch (SetClientCreator(response))
-              });
-        // clientAPI.GetClient(userId, startDate, endDate).then(response => {
-        //     dispatch (SetClientCreator(response))
-        //   });
+        clientAPI.GetClient(userId, startDate, endDate).then(response => {
+                dispatch (SetClientCreator(response))
+        });
+          });
     };
 }
 

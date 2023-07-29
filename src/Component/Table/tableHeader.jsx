@@ -26,12 +26,11 @@ let TableHeader = (props) => {
             "userId": `${usId}`
         }
         props.addRecordsUser(usId, result,"01-01-2020", "02-01-2020");
-        props.getClient(usId, "01-01-2020", "02-01-2020");
     }
 
     const onDelite = (lineId) => {
-        props.deliteRecordsUser(lineId);
-        props.getClient(usId, "01-01-2020", "02-01-2020");
+        props.deliteRecordsUser(usId, lineId, "01-01-2020", "02-01-2020");
+        
      }
   
     useEffect( () => {
@@ -39,8 +38,7 @@ let TableHeader = (props) => {
         props.getClient(usId, "01-01-2020", "02-01-2020");
         
     },[usId]);
-    
-    
+
     return (
         <div className={cs.tab}>
             <span className={cs.span}>

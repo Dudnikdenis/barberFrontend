@@ -10,26 +10,32 @@ const instance = axios.create({
 export const clientAPI = {
     async GetClient(id, startDate, endDate) 
     {
-        const response = await instance.get(`records/user/${id}?startDate=${startDate}&endDate=${endDate}`);
-        return response.data;
+        return await instance.get(`records/user/${id}?startDate=${startDate}&endDate=${endDate}`).then(response=>{
+            return response.data;
+        })
+        
+        
     },
 
     async DeliteRecordsUser(lineId) 
     {
-        const response = await instance.delete(`records/line/${lineId}`);
+        return await instance.delete(`records/line/${lineId}`).then(response=>{   
         return response;
+    })
     },
 
     async UpdateRecordsUser(lineId, records) 
     {
-        const response = await instance.patch(`records/line/${lineId}`, records);
+        return await instance.patch(`records/line/${lineId}`, records).then(response=>{
         return response;
+        });
     },
 
     async recordsUser(userID,records) 
     {
-        const response = await instance.post(`records/user/${userID}`, records);
+         return await instance.post(`records/user/${userID}`, records).then(response=>{
         return response;
+         });
     }
 }
 
