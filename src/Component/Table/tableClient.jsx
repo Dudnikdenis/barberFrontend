@@ -4,50 +4,34 @@ import cs from './table.module.css';
 
 
 function TableClient(props) {
-    
-    //debugger;
+
+    const onClicDelite = (e,lineId) => {
+       props.onDelete(lineId );    }
 
 
-    const onChengeTime = (e,clientId, masterId) => {
-        props.UpdateTimeCreator(e.target.value, masterId, clientId);
-    }
+    // const onChengeTime = (e,clientId, masterId) => {
+    //     props.UpdateTimeCreator(e.target.value, masterId, clientId);
+    // }
 
-    const onChengeClientName = (e,clientId, masterId) => {
-        props.UpdateClientNameCreator(e.target.value, masterId, clientId);
-    }
-
-    const onChengeService = (e,clientId, masterId) => {
-        props.UpdateServiceCreator(e.target.value, masterId, clientId);
-    }
-
-    const onChengeComment = (e,clientId, masterId) => {
-        props.UpdateCommentCreator(e.target.value, masterId, clientId);
-    }
     return (
         <div className={cs.tab}>
             {props.client.map(c => 
             <div>
-                
+                <span>
                     <table key={c.Id} className={cs.tab_total}>
-                        <tr>
-                            <td className={cs.tdTime}>
-                                <input value={c.time} onChange = {e=>onChengeTime(e, c.Id, props.masterId)}/>
-                            </td>
-
-                            <td className={cs.tdClient}>
-                                <input value={c.clientName} onChange = {e=>onChengeClientName(e, c.Id, props.masterId)}/> 
-                            
-                            </td>
-                            <td className={cs.tdSevice}>
-                                <input value={c.procedureName} onChange = {e=>onChengeService(e, c.Id, props.masterId)}/>
-                            
-                            </td>
-                            <td className={cs.tdSevice}>
-                                <input value={c.comment} onChange = {e=>onChengeComment(e, c.Id, props.masterId)}/>
-                            
-                            </td>
-                        </tr>
-                    </table>
+                            <tr>
+                                <td className={cs.tdTime}>{c.time}</td>
+                                <td className={cs.tdClient}>{c.clientName}</td>
+                                <td className={cs.tdSevice}>{c.procedureName}</td>
+                                <td className={cs.tdSevice}>{c.comment} </td>
+                                <button onClick = {e=>onClicDelite(e, c.lineId)}>Удалить</button>
+                            </tr>
+                        </table>
+                </span>
+                <span>
+                    
+                </span>
+                    
             </div>)}                 
         </div>
         

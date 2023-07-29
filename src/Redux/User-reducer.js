@@ -38,7 +38,6 @@ let userReducer = (state = initialState, action) => {
             }
                 
             stateCopy.users = [...state.users, ...action.users];
-            console.log("action");
             return stateCopy;
         // case ADD_USER:
         //     stateCopy = {...state};
@@ -87,7 +86,6 @@ export const SetUserCreator = (users) => ({type:SET_USER,users});
 // export const AddUserCreator = (users) => ({type:SET_USER,users});
 
 export const getUser= () => {   // Thunk
-    console.log("getUser");
     return (dispatch) => {
         userAPI.GetUser().then(response => {
         dispatch (SetUserCreator(response))
@@ -96,7 +94,6 @@ export const getUser= () => {   // Thunk
 }
 
 export const addUser= (user) => {   // Thunk
-    console.log("addUser");
     return (dispatch) => {
         userAPI.AddUser(user);
         userAPI.GetUser().then(response => {

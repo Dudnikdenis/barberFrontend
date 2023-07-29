@@ -23,20 +23,15 @@ let TableHeader = (props) => {
             "procedureName": `${formData.service}`,
             "time": `${formData.time}`,
             "userId": `${usId}`
-
-            // "lineId": "0",
-            // "userId": `${usId}`,
-            // "date": `${formData.date}`,
-            // "time": `${formData.time}`,
-            // "clientName": `${formData.clientName}`,
-            // "procedureName": `${formData.service}`,
-            // "procedureCost": "1000",
-            // "procedureDiscount": "10%",
-            // "comment": `${formData.comment}`
         }
-        props.addRecordsUser(usId, result,"01-01-2020", "02-01-2020")
+        props.addRecordsUser(usId, result,"01-01-2020", "02-01-2020");
+        props.getClient(usId, "01-01-2020", "02-01-2020");
     }
 
+    const onDelite = (lineId) => {
+        props.deliteRecordsUser(lineId);
+        props.getClient(usId, "01-01-2020", "02-01-2020");
+     }
   
     useEffect( () => {
                  
@@ -58,7 +53,7 @@ let TableHeader = (props) => {
                 {props.master.master.map(m=>
                 <div>
                     <div className={cs.header}>{m.date}</div> 
-                    {m.userRecords.length===0? "Нет записей": <TableClient client={m.userRecords} {...props}/>}
+                    {m.userRecords.length===0? "Нет записей": <TableClient masterId={usId} onDelete={onDelite} client={m.userRecords} {...props}/>}
                 </div>
                 )
             }

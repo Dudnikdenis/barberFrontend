@@ -2,13 +2,10 @@ import React from "react";
 import {connect} from 'react-redux'
 import TableHeader from "./tableHeader";
 import { AddClientCreator, 
-    UpdateTimeCreator, 
-    UpdateClientNameCreator, 
-    UpdateServiceCreator, 
-    UpdateCommentCreator,
     getClient,
     addRecordsUser,
-    SetIsDidMountCreator} from "../../Redux/Master-reducer";
+    updateRecordsUser,
+    deliteRecordsUser,DeliteClientCreator} from "../../Redux/Master-reducer";
 
     
 
@@ -22,10 +19,6 @@ let mapStateToProps = (state) => {
 
 const TableContainer = connect(mapStateToProps,{
     AddClientCreator, 
-    UpdateTimeCreator, 
-    UpdateClientNameCreator, 
-    UpdateServiceCreator, 
-    UpdateCommentCreator,
-    getClient, addRecordsUser,SetIsDidMountCreator})(TableHeader);
+    getClient, addRecordsUser,updateRecordsUser, deliteRecordsUser,DeliteClientCreator})(TableHeader);
 
 export default TableContainer;

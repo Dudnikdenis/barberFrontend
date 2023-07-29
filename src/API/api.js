@@ -12,6 +12,24 @@ export const clientAPI = {
     {
         const response = await instance.get(`records/user/${id}?startDate=${startDate}&endDate=${endDate}`);
         return response.data;
+    },
+
+    async DeliteRecordsUser(lineId) 
+    {
+        const response = await instance.delete(`records/line/${lineId}`);
+        return response;
+    },
+
+    async UpdateRecordsUser(lineId, records) 
+    {
+        const response = await instance.patch(`records/line/${lineId}`, records);
+        return response;
+    },
+
+    async recordsUser(userID,records) 
+    {
+        const response = await instance.post(`records/user/${userID}`, records);
+        return response;
     }
 }
 
@@ -21,16 +39,16 @@ export const userAPI = {
         const response = await instance.get("users");
         return response.data;
     },
+    
+    
 
     async AddUser(user) 
     {
-         await instance.post("users", user);
+        const response = await instance.post("users", user);
+        return response;
     },
 
-    async recordsUser(userID,records) 
-    {
-         await instance.post(`records/user/${userID}`, records);
-    }
+    
 }
 
 
