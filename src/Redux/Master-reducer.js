@@ -50,7 +50,7 @@ let masterReducer = (state = initialState, action) => {
 // export const название-диспатча = (параметр) => ({type: название action, параметр}); пример dispatch или добавляем thunk
 export const AddClientCreator = (newClient,masterId) => ({type: ADD_CLIENT, newClient,masterId});
 export const SetClientCreator = (master) => ({type:SET_CLIENT,master});
-export const DeliteClientCreator = (i) => ({type:DELITE_CLIENT,i})
+//export const DeliteClientCreator = (i) => ({type:DELITE_CLIENT,i})
 export const getClient = (id, startDate, endDate) => {   // Thunk
     return (dispatch) => {
         //dispatch(DeliteClientCreator());
@@ -75,21 +75,27 @@ export const deliteRecordsUser = (id, lineId, startDate, endDate) => { //id,, st
 
 export const addRecordsUser= (userId, records, startDate, endDate) => { 
     return (dispatch) => {
-        dispatch(DeliteClientCreator());
+       // dispatch(DeliteClientCreator());
         clientAPI.recordsUser(userId, records).then(response => {
-        clientAPI.GetClient(userId, startDate, endDate).then(response => {
-                dispatch (SetClientCreator(response))
-        });
+            if(response==="OK")
+            {
+                clientAPI.GetClient(userId, startDate, endDate).then(response => {
+                        dispatch (SetClientCreator(response))});
+            }
           });
     };
 }
 
-export const updateRecordsUser = (lineId, records) => { 
+export const updateRecordsUser = (userId, lineId, records, startDate, endDate) => { 
     return (dispatch) => {
-        dispatch(DeliteClientCreator());
-        clientAPI.UpdateRecordsUser(lineId, records);
-        // clientAPI.GetClient(id, startDate, endDate).then(response => {
-        //     dispatch (SetClientCreator(response))});
+        //dispatch(DeliteClientCreator());
+        clientAPI.UpdateRecordsUser(lineId, records).then(response=>{
+            if(response==="OK")
+            {
+                clientAPI.GetClient(userId, startDate, endDate).then(response => {
+                    dispatch (SetClientCreator(response))});
+            }
+        });
     };
 }
 

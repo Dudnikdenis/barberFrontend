@@ -19,13 +19,3 @@ const ClientAddForm = (props) => {
 const ClientAddReduxForm = reduxForm({form: 'ClientAddForm'})(ClientAddForm)
 
 export default ClientAddReduxForm;
-
-// "lineId": 0,
-//      "userId": 1,
-//      "date": "2020-01-01",
-//       "time": "09:30",
-//      "clientName": "Магомет",
-//      "procedureName": "Стрижка",
-//   "procedureCost": "1000",
-//   "procedureDiscount": "10%",
-//      "comment": "Предупредить за 30 минут"

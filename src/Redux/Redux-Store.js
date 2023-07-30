@@ -7,7 +7,8 @@ import { reducer as formReducer } from 'redux-form'
 let reducers = combineReducers({
     master: masterReducer, // добавляем следующий редюсер
     user: userReducer,
-    form: formReducer
+    form: formReducer,
+    formRed:formReducer 
 });
 
 
