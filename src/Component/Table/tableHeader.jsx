@@ -7,8 +7,6 @@ import ClientAddReduxForm from "./clientAddForm";
 
 
 let TableHeader = (props) => {
-
-    const [records,setRecords] = useState({});
     const location = useLocation();
     const { usName, usId } = location.state;
 
@@ -29,7 +27,8 @@ let TableHeader = (props) => {
     }
 
     const onDelite = (lineId) => {
-        props.deliteRecordsUser(usId, lineId, "01-01-2020", "02-01-2020");
+        props.deliteRecordsUser(usId, lineId, "01-01-2020", "02-01-2020"); //usId, , "01-01-2020", "02-01-2020"
+        //props.getClient(usId, "01-01-2020", "02-01-2020");
         
      }
   

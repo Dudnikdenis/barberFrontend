@@ -20,21 +20,21 @@ export const clientAPI = {
     async DeliteRecordsUser(lineId) 
     {
         return await instance.delete(`records/line/${lineId}`).then(response=>{   
-        return response;
+        return response.data;
     })
     },
 
     async UpdateRecordsUser(lineId, records) 
     {
         return await instance.patch(`records/line/${lineId}`, records).then(response=>{
-        return response;
+        return response.data;
         });
     },
 
     async recordsUser(userID,records) 
     {
          return await instance.post(`records/user/${userID}`, records).then(response=>{
-        return response;
+        return response.data;
          });
     }
 }

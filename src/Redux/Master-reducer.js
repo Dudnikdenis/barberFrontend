@@ -11,8 +11,7 @@ const SET_IS_DID_MOUNT = "SET_IS_DID_MOUNT"
 const DELITE_CLIENT = "DELITE_CLIENT"
 
 let initialState = {
-    master:[],
-    isDidMount:false
+    master:[]
     
 };
 
@@ -20,12 +19,13 @@ let masterReducer = (state = initialState, action) => {
     let stateCopy;
     switch (action.type){
         case SET_CLIENT: 
-
-        stateCopy = {...state};
-        stateCopy.master = [...state.master, ...action.master];
+        stateCopy = {master:[]};
+        stateCopy.master.push(...action.master);
+        
         for (let i = 0;i<action.master.length;i++){
-            stateCopy.master[i].userRecords = [ ...action.master[i].userRecords]
+            stateCopy.master[i].userRecords=[ ...action.master[i].userRecords];
         }
+        action.master = [];
         return stateCopy;
 
 
@@ -53,19 +53,23 @@ export const SetClientCreator = (master) => ({type:SET_CLIENT,master});
 export const DeliteClientCreator = (i) => ({type:DELITE_CLIENT,i})
 export const getClient = (id, startDate, endDate) => {   // Thunk
     return (dispatch) => {
-        dispatch(DeliteClientCreator());
+        //dispatch(DeliteClientCreator());
         clientAPI.GetClient(id, startDate, endDate).then(response => {
         dispatch (SetClientCreator(response))
       });
     };
 }
 
-export const deliteRecordsUser = (id, lineId, startDate, endDate) => { 
+export const deliteRecordsUser = (id, lineId, startDate, endDate) => { //id,, startDate, endDate
     return (dispatch) => {
-        dispatch(DeliteClientCreator());
-        clientAPI.DeliteRecordsUser(lineId);
-        clientAPI.GetClient(id, startDate, endDate).then(response => {
-            dispatch (SetClientCreator(response))});
+        clientAPI.DeliteRecordsUser(lineId).then(response=>{
+            if(response==="NO_CONTENT")
+            {
+                clientAPI.GetClient(id, startDate, endDate).then(response => {
+                    dispatch (SetClientCreator(response))});
+            }
+        });
+        
     };
 }
 

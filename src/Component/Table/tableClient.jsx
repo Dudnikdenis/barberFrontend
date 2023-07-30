@@ -8,12 +8,7 @@ import cs from './table.module.css';
 function TableClient(props) {
 
     const onClicDelite = (e,lineId) => {
-       props.onDelete(lineId );    }
-
-
-    const onChengeTime = (e,clientId) => {
-        console.log(clientId);
-       // props.UpdateTimeCreator(e.target.value, masterId, clientId);
+       props.onDelete(lineId);    
     }
 
     return (
@@ -28,7 +23,7 @@ function TableClient(props) {
                             <td className={cs.tdSevice}>{c.procedureName}</td>
                             <td className={cs.tdSevice}>{c.comment} </td>
                             <button onClick = {e=>onClicDelite(e, c.lineId)}>Удалить</button>
-                            <Link type="button" to="/records/line" state={{ records:c, userId:props.masterId}} onClick = {e=>onChengeTime(e, c.lineId)}>Изменить</Link>
+                            <Link type="button" to="/records/line" state={{ records:c, userId:props.masterId}} >Изменить</Link>
                         </tr>
                     </table>
                 </span>
